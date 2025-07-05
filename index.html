@@ -274,18 +274,20 @@
             }
         }
         
+        /* --- UPDATED RESPONSIVE TABLE STYLES --- */
         @media (max-width: 768px) {
-            /* --- RESPONSIVE TABLE STYLES FOR MOBILE --- */
             .responsive-table thead {
-                display: none; /* Hide table headers */
+                display: none;
             }
 
             .responsive-table tr {
                 display: block;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
                 border: 1px solid #ddd;
-                border-radius: 5px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+                background-color: #fff;
+                padding: 10px;
             }
 
             .responsive-table td {
@@ -294,8 +296,9 @@
                 align-items: center;
                 text-align: right;
                 border: none;
-                border-bottom: 1px solid #eee;
-                padding: 10px;
+                border-bottom: 1px solid #f0f0f0;
+                padding: 12px 5px;
+                font-size: 0.95em; /* Slightly smaller font for content */
             }
 
             .responsive-table td:last-child {
@@ -306,12 +309,22 @@
                 content: attr(data-label);
                 font-weight: bold;
                 text-align: left;
-                margin-right: 15px;
+                margin-right: 10px;
                 color: var(--primary-color);
                 font-family: var(--header-font);
+                flex-basis: 35%; /* Give labels a consistent width */
+                font-size: 0.9em; /* Smaller font for labels */
             }
-            /* --- END OF RESPONSIVE TABLE STYLES --- */
+            
+            .responsive-table .works-cited-link-cell {
+                justify-content: center;
+            }
+
+            .responsive-table .works-cited-link-cell::before {
+                flex-basis: auto; /* Let the 'Link' label be flexible */
+            }
         }
+        /* --- END OF UPDATED STYLES --- */
 
         @media (max-width: 600px) {
             header h1 {
