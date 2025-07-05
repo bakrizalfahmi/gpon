@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPON WiFi for Malaysian Schools Analysis</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #0055a4;
+            --accent-color: #ffc400;
+            --text-color: #333;
+            --bg-color: #f4f7fa;
+            --header-font: 'Segoe UI', Arial, sans-serif;
+            --body-font: 'Georgia', serif;
+        }
+
+        body {
+            font-family: var(--body-font);
+            line-height: 1.7;
+            color: var(--text-color);
+            margin: 0;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+            position: relative;
+        }
+
+        header h1 {
+            font-family: var(--header-font);
+            font-size: 2.2em;
+            margin: 0;
+            line-height: 1.4; /* Adjusted for better spacing between lines */
+            font-weight: 600;
+        }
+
+        .lang-switcher-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: var(--header-font);
+            font-weight: bold;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+
+        .lang-btn.active {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            cursor: default;
+        }
+
+        .lang-btn:not(.active):hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Allow nav items to wrap on smaller screens */
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            padding: 15px 18px;
+            text-decoration: none;
+            font-family: var(--header-font);
+            font-weight: 600;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s, color 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav ul li a:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .mobile-nav-toggle { 
+            display: none; 
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            font-size: 1.2em;
+            padding: 12px 20px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            font-family: var(--header-font);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        main section {
+            background-color: white;
+            margin-bottom: 25px;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            scroll-margin-top: 60px;
+        }
+
+        main h2 {
+            font-family: var(--header-font);
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        main h3 {
+            font-family: var(--header-font);
+            color: var(--secondary-color);
+            font-size: 1.4em;
+        }
+
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-family: var(--header-font);
+        }
+
+        table tr:nth-child(even) {
+            background-color: var(--bg-color);
+        }
+
+        .infographic-container {
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .infographic-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .infographic-text {
+            font-family: var(--header-font);
+            font-size: 14px;
+            fill: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .infographic-line {
+            stroke: var(--secondary-color);
+            stroke-width: 2;
+        }
+        
+        .infographic-highlight {
+            fill: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-family: var(--header-font);
+            font-size: 0.9em;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+             nav ul li a {
+                padding: 15px 12px;
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 992px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--secondary-color);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li a {
+                text-align: left;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+            }
+            
+            .mobile-nav-toggle {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .lang-switcher-container {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 15px;
+                display: inline-flex;
+                width: auto;
+            }
+            main section {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="lang-switcher-container">
+            <button id="lang-en-btn" class="lang-btn">EN</button>
+            <button id="lang-ms-btn" class="lang-btn">MY</button>
+        </div>
+        <h1>
+            <span class="lang-en">Empowering the Next Generation:<br>An Analysis of GPON WiFi for Malaysian Schools</span>
+            <span class="lang-ms hidden">Memperkasa Generasi Akan Datang:<br>Analisis WiFi GPON untuk Sekolah di Malaysia</span>
+        </h1>
+    </header>
+
+    <nav id="main-nav">
+        <button class="mobile-nav-toggle" id="mobile-nav-btn">
+            <span class="lang-en">☰ Menu</span>
+            <span class="lang-ms hidden">☰ Menu</span>
+        </button>
+        <ul id="nav-links">
+            <li><a href="#summary"><span class="lang-en">Summary</span><span class="lang-ms hidden">Ringkasan</span></a></li>
+            <li><a href="#s1"><span class="lang-en">Digital Context</span><span class="lang-ms hidden">Konteks Digital</span></a></li>
+            <li><a href="#s2"><span class="lang-en">GPON Technology</span><span class="lang-ms hidden">Teknologi GPON</span></a></li>
+            <li><a href="#s3"><span class="lang-en">National Agenda</span><span class="lang-ms hidden">Agenda Nasional</span></a></li>
+            <li><a href="#s4"><span class="lang-en">Strategic Fit</span><span class="lang-ms hidden">Kesesuaian</span></a></li>
+            <li><a href="#s5"><span class="lang-en">Comparison</span><span class="lang-ms hidden">Perbandingan</span></a></li>
+            <li><a href="#s6"><span class="lang-en">Market</span><span class="lang-ms hidden">Pasaran</span></a></li>
+            <li><a href="#s7"><span class="lang-en">Implementation</span><span class="lang-ms hidden">Pelaksanaan</span></a></li>
+            <li><a href="#s8"><span class="lang-en">Recommendations</span><span class="lang-ms hidden">Cadangan</span></a></li>
+            <li><a href="#infographic"><span class="lang-en">Infographic</span><span class="lang-ms hidden">Infografik</span></a></li>
+            <li><a href="#works-cited"><span class="lang-en">Cited</span><span class="lang-ms hidden">Rujukan</span></a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        
+        <!-- Executive Summary Section -->
+        <section id="summary">
+            <h2>
+                <span class="lang-en">Executive Summary</span>
+                <span class="lang-ms hidden">Ringkasan Eksekutif</span>
+            </h2>
+            <div class="lang-en">
+                <p>The digitalization of Malaysia's education sector stands at a critical juncture, propelled by the national ambition to cultivate a digitally fluent generation. This report provides an exhaustive analysis of the deployment of Gigabit Passive Optical Network (GPON) technology as the foundational infrastructure for high-speed WiFi in Malaysian schools.</p>
+                <ul>
+                    <li><strong>Strategic Investment:</strong> The government's Point of Presence (PoP) initiative, using GPON fiber, is a key investment to bridge the digital divide.</li>
+                    <li><strong>Critical Challenges:</strong> The National Audit Report (LKAN) highlights a major disconnect between infrastructure readiness and service adoption due to existing contracts.</li>
+                    <li><strong>Holistic Approach Needed:</strong> Success requires streamlined procurement, funding for "last-yard" connectivity (campus-wide WiFi 6), and investment in digital pedagogy.</li>
+                    <li><strong>Key Recommendations:</strong> Policymakers must ensure a seamless transition, schools should develop digital standards, and telcos should create bespoke "Smart School" solutions.</li>
+                </ul>
+                <p>Ultimately, the deployment of GPON is the foundational enabler for Malaysia's educational future, requiring a new, collaborative pact between technology, policy, and pedagogy.</p>
+            </div>
+            <div class="lang-ms hidden">
+                <p>Pendigitalan sektor pendidikan Malaysia berada pada titik persimpangan yang kritikal, didorong oleh cita-cita negara untuk melahirkan generasi yang fasih digital. Laporan ini menyediakan analisis terperinci mengenai pelaksanaan teknologi Rangkaian Optik Pasif Gigabit (GPON) sebagai infrastruktur asas untuk WiFi berkelajuan tinggi di sekolah-sekolah Malaysia.</p>
+                <ul>
+                    <li><strong>Pelaburan Strategik:</strong> Inisiatif Titik Kehadiran (PoP) kerajaan, menggunakan gentian GPON, merupakan pelaburan utama untuk merapatkan jurang digital.</li>
+                    <li><strong>Cabaran Kritikal:</strong> Laporan Ketua Audit Negara (LKAN) menyoroti jurang besar antara kesediaan infrastruktur dan penggunaan perkhidmatan disebabkan kontrak sedia ada.</li>
+                    <li><strong>Pendekatan Holistik Diperlukan:</strong> Kejayaan memerlukan perolehan yang dipermudah, pembiayaan untuk kesalinghubungan "last-yard" (WiFi 6 seluruh kampus), dan pelaburan dalam pedagogi digital.</li>
+                    <li><strong>Cadangan Utama:</strong> Penggubal dasar mesti memastikan peralihan yang lancar, sekolah perlu membangunkan piawaian digital, dan syarikat telekomunikasi perlu mencipta penyelesaian "Sekolah Pintar" yang ditempah khas.</li>
+                </ul>
+                <p>Pada akhirnya, pelaksanaan GPON adalah pemboleh daya asas untuk masa depan pendidikan Malaysia, yang memerlukan satu pakatan kerjasama baharu antara teknologi, dasar, dan pedagogi.</p>
+            </div>
+        </section>
+
+        <!-- Section 1 -->
+        <section id="s1">
+            <h2>
+                <span class="lang-en">The Digital Imperative</span>
+                <span class="lang-ms hidden">Imperatif Digital</span>
+            </h2>
+            <div class="lang-en">
+                <h3>1.1 The Role of High-Speed Internet in 21st-Century Pedagogy</h3>
+                <ul>
+                    <li>High-speed internet is now a fundamental utility in modern education, essential for digital platforms, global knowledge access, and real-time collaboration.</li>
+                    <li>The focus has moved from basic access to ensuring quality, stability, and speed to support applications like HD video, AR, and VR.</li>
+                </ul>
+                <h3>1.2 The Malaysian Education Blueprint and National Digital Aspirations</h3>
+                <ul>
+                    <li>The push for better connectivity aligns with the long-term goals of the Malaysian Education Blueprint (PPPM) 2013-2025.</li>
+                    <li>Past initiatives like SchoolNet and 1BestariNet have laid the groundwork for the current fiber-optic strategy.</li>
+                </ul>
+                <h3>1.3 Current State of School Connectivity: Challenges and Opportunities</h3>
+                <ul>
+                    <li>A significant "digital divide" persists, especially affecting rural areas in Sabah and Sarawak.</li>
+                    <li>Even where access is "available," issues like slow speeds and instability hinder the effective use of digital tools, creating a "policy-reality gap."</li>
+                </ul>
+            </div>
+            <div class="lang-ms hidden">
+                <h3>1.1 Peranan Internet Berkelajuan Tinggi dalam Pedagogi Abad Ke-21</h3>
+                <ul>
+                    <li>Internet berkelajuan tinggi kini menjadi utiliti asas dalam pendidikan moden, penting untuk platform digital, akses pengetahuan global, dan kerjasama masa nyata.</li>
+                    <li>Fokus telah beralih daripada akses asas kepada memastikan kualiti, kestabilan, dan kelajuan untuk menyokong aplikasi seperti video HD, AR, dan VR.</li>
+                </ul>
+                <h3>1.2 Pelan Pembangunan Pendidikan Malaysia dan Aspirasi Digital Negara</h3>
+                <ul>
+                    <li>Dorongan untuk kesalinghubungan yang lebih baik selaras dengan matlamat jangka panjang Pelan Pembangunan Pendidikan Malaysia (PPPM) 2013-2025.</li>
+                    <li>Inisiatif terdahulu seperti SchoolNet dan 1BestariNet telah meletakkan asas bagi strategi gentian optik semasa.</li>
+                </ul>
+                <h3>1.3 Keadaan Semasa Kesalinghubungan Sekolah: Cabaran dan Peluang</h3>
+                <ul>
+                    <li>"Jurang digital" yang ketara masih wujud, terutamanya menjejaskan kawasan luar bandar di Sabah dan Sarawak.</li>
+                    <li>Walaupun akses "tersedia", isu seperti kelajuan rendah dan ketidakstabilan menghalang penggunaan alat digital secara berkesan, mewujudkan "jurang dasar-realiti".</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="s2">
+            <h2>
+                <span class="lang-en">Deconstructing GPON Technology</span>
+                <span class="lang-ms hidden">Menghurai Teknologi GPON</span>
+            </h2>
+            <div class="lang-en">
+                <h3>2.1 Core Architecture & Key Components</h3>
+                <ul>
+                    <li>GPON uses a point-to-multipoint (P2MP) architecture with an OLT (central hub), passive splitters, and an ONU/ONT at the user's end (the school).</li>
+                    <li>"Passive" splitters require no electricity, reducing energy use, maintenance, and failure points.</li>
+                </ul>
+                <h3>2.3 Technical Superiority</h3>
+                <ul>
+                    <li><strong>Speed & Bandwidth:</strong> Offers up to 2.4 Gbps downstream and 1.2 Gbps upstream.</li>
+                    <li><strong>Reach & Scalability:</strong> Transmits data up to 20 km and is future-proof, allowing upgrades to 10G-PON and beyond by only changing active equipment.</li>
+                </ul>
+                 <h3>2.4 Security and Quality of Service (QoS)</h3>
+                <ul>
+                    <li><strong>Security:</strong> Uses AES-128 bit encryption to ensure data privacy on the shared network.</li>
+                    <li><strong>Quality of Service (QoS):</strong> Includes robust mechanisms to prioritize critical traffic like video conferencing for lessons.</li>
+                </ul>
+            </div>
+            <div class="lang-ms hidden">
+                <h3>2.1 Seni Bina Teras & Komponen Utama</h3>
+                <ul>
+                    <li>GPON menggunakan seni bina titik-ke-berbilang-titik (P2MP) dengan OLT (hab pusat), pemisah pasif, dan ONU/ONT di pihak pengguna (sekolah).</li>
+                    <li>Pemisah "pasif" tidak memerlukan elektrik, mengurangkan penggunaan tenaga, penyelenggaraan, dan titik kegagalan.</li>
+                </ul>
+                <h3>2.3 Keunggulan Teknikal</h3>
+                <ul>
+                    <li><strong>Kelajuan & Lebar Jalur:</strong> Menawarkan sehingga 2.4 Gbps hiliran dan 1.2 Gbps huluan.</li>
+                    <li><strong>Jangkauan & Kebolehskalaan:</strong> Menghantar data sehingga 20 km dan kalis masa depan, membenarkan naik taraf ke 10G-PON dan seterusnya dengan hanya menukar peralatan aktif.</li>
+                </ul>
+                <h3>2.4 Keselamatan dan Kualiti Perkhidmatan (QoS)</h3>
+                <ul>
+                    <li><strong>Keselamatan:</strong> Menggunakan penyulitan AES-128 bit untuk memastikan privasi data pada rangkaian kongsi.</li>
+                    <li><strong>Kualiti Perkhidmatan (QoS):</strong> Termasuk mekanisme mantap untuk memberi keutamaan kepada trafik kritikal seperti persidangan video untuk pelajaran.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="s3">
+            <h2>
+                <span class="lang-en">National Connectivity Agenda</span>
+                <span class="lang-ms hidden">Agenda Kesalinghubungan Nasional</span>
+            </h2>
+             <div class="lang-en">
+                <h3>3.1 The JENDELA Framework</h3>
+                <ul>
+                    <li>JENDELA is the primary national plan driving digital infrastructure upgrades, including expanding fiber coverage and preparing for 5G.</li>
+                </ul>
+                <h3>3.2 The Point of Presence (PoP) Initiative</h3>
+                <ul>
+                    <li>The PoP initiative uses schools as "anchor tenants" or central hubs to deliver fiber to both the school and the surrounding rural community.</li>
+                    <li>The project aims to deploy 4,370 PoPs nationwide, with 1,044 completed as of May 2024.</li>
+                </ul>
+                <h3>3.3 The July 2024 Mandate</h3>
+                <ul>
+                    <li>Starting July 1, 2024, a special high-speed internet package will be available to all 10,000 KPM schools via the new PoP infrastructure.</li>
+                    <li>The government also acknowledges the need to address the "last yard" problem by funding WiFi access points within school campuses.</li>
+                </ul>
+            </div>
+            <div class="lang-ms hidden">
+                <h3>3.1 Rangka Kerja JENDELA</h3>
+                <ul>
+                    <li>JENDELA adalah pelan kebangsaan utama yang memacu naik taraf infrastruktur digital, termasuk memperluas liputan gentian dan bersiap untuk 5G.</li>
+                </ul>
+                <h3>3.2 Inisiatif Titik Kehadiran (PoP)</h3>
+                <ul>
+                    <li>Inisiatif PoP menggunakan sekolah sebagai "penyewa utama" atau hab pusat untuk menyampaikan gentian kepada sekolah dan komuniti luar bandar di sekelilingnya.</li>
+                    <li>Projek ini bertujuan untuk melaksanakan 4,370 PoP di seluruh negara, dengan 1,044 siap sehingga Mei 2024.</li>
+                </ul>
+                <h3>3.3 Mandat Julai 2024</h3>
+                <ul>
+                    <li>Bermula 1 Julai 2024, pakej internet berkelajuan tinggi khas akan tersedia untuk semua 10,000 sekolah KPM melalui infrastruktur PoP baharu.</li>
+                    <li>Kerajaan juga mengakui keperluan untuk menangani masalah "last yard" dengan membiayai titik akses WiFi di dalam kampus sekolah.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Other sections will follow the same condensed format for brevity -->
+        <section id="s4"><h2><span class="lang-en">Strategic Fit</span><span class="lang-ms hidden">Kesesuaian Strategik</span></h2><div class="lang-en"><p>GPON is a strong strategic fit due to its high bandwidth for digital learning, unmatched reliability, and lower long-term operational costs. While initial setup costs are high, the government's PoP project mitigates this. The key remaining challenge is ensuring expert network design and management within the school environment.</p></div><div class="lang-ms hidden"><p>GPON ialah pilihan strategik yang kukuh kerana lebar jalurnya yang tinggi untuk pembelajaran digital, kebolehpercayaan yang tiada tandingan, dan kos operasi jangka panjang yang lebih rendah. Walaupun kos pemasangan awal tinggi, projek PoP kerajaan mengurangkannya. Cabaran utama yang tinggal ialah memastikan reka bentuk dan pengurusan rangkaian yang pakar dalam persekitaran sekolah.</p></div></section>
+        <section id="s5"><h2><span class="lang-en">Comparative Analysis</span><span class="lang-ms hidden">Analisis Perbandingan</span></h2><div class="lang-en"><p>GPON is technically superior to legacy copper (ADSL/VDSL) in every aspect. Compared to 5G FWA, GPON offers more stable and reliable performance, making it the ideal primary connection. 5G FWA serves as an excellent complementary technology for hard-to-reach areas or as a backup.</p></div><div class="lang-ms hidden"><p>GPON secara teknikalnya lebih unggul daripada tembaga legasi (ADSL/VDSL) dalam setiap aspek. Berbanding 5G FWA, GPON menawarkan prestasi yang lebih stabil dan boleh dipercayai, menjadikannya sambungan utama yang ideal. 5G FWA berfungsi sebagai teknologi pelengkap yang sangat baik untuk kawasan yang sukar dicapai atau sebagai sandaran.</p></div></section>
+        <section id="s6"><h2><span class="lang-en">Market Landscape</span><span class="lang-ms hidden">Landskap Pasaran</span></h2><div class="lang-en"><p>Malaysia's major telcos (TM, Maxis, CelcomDigi) are all technologically capable of delivering GPON services. Competition is shifting from basic connectivity to value-added services like digital learning platforms (e.g., Maxis eKelas) and comprehensive smart campus solutions (e.g., TM One), which will be key differentiators for schools.</p></div><div class="lang-ms hidden"><p>Syarikat telekomunikasi utama Malaysia (TM, Maxis, CelcomDigi) semuanya berkemampuan dari segi teknologi untuk menyampaikan perkhidmatan GPON. Persaingan beralih daripada kesalinghubungan asas kepada perkhidmatan nilai tambah seperti platform pembelajaran digital (cth., Maxis eKelas) dan penyelesaian kampus pintar yang komprehensif (cth., TM One), yang akan menjadi pembeza utama bagi sekolah.</p></div></section>
+        <section id="s7"><h2><span class="lang-en">Implementation Realities</span><span class="lang-ms hidden">Realiti Pelaksanaan</span></h2><div class="lang-en"><p>Past projects like 1BestariNet and recent LKAN audit findings on the PoP project highlight a critical challenge: a disconnect between infrastructure deployment and service adoption. The audit found only 0.33% of completed PoP sites were in use due to a pre-existing contract, revealing a systemic failure of inter-agency coordination that must be resolved.</p></div><div class="lang-ms hidden"><p>Projek-projek lepas seperti 1BestariNet dan penemuan audit LKAN baru-baru ini mengenai projek PoP menonjolkan cabaran kritikal: jurang antara pelaksanaan infrastruktur dan penggunaan perkhidmatan. Audit mendapati hanya 0.33% tapak PoP yang siap telah digunakan kerana kontrak sedia ada, mendedahkan kegagalan sistemik dalam penyelarasan antara agensi yang mesti diselesaikan.</p></div></section>
+        <section id="s8"><h2><span class="lang-en">Strategic Recommendations</span><span class="lang-ms hidden">Cadangan Strategik</span></h2><div class="lang-en"><p>Success requires a coordinated effort. <strong>Policymakers</strong> must ensure a seamless transition and fund "last yard" WiFi. <strong>Educational Administrators</strong> must develop digital standards and focus on digital pedagogy. <strong>Telcos</strong> should create bespoke "Education-as-a-Service" packages with expert support.</p></div><div class="lang-ms hidden"><p>Kejayaan memerlukan usaha yang terselaras. <strong>Penggubal Dasar</strong> mesti memastikan peralihan yang lancar dan membiayai WiFi "last yard". <strong>Pentadbir Pendidikan</strong> mesti membangunkan piawaian digital dan memberi tumpuan kepada pedagogi digital. <strong>Syarikat Telekomunikasi</strong> harus mencipta pakej "Pendidikan-sebagai-Perkhidmatan" yang ditempah khas dengan sokongan pakar.</p></div></section>
+
+        <!-- Infographic Section -->
+        <section id="infographic">
+            <h2>
+                <span class="lang-en">Infographic: How GPON Connects a School</span>
+                <span class="lang-ms hidden">Infografik: Bagaimana GPON Menghubungkan Sekolah</span>
+            </h2>
+            <div class="infographic-container">
+                 <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="800" height="400" fill="#f4f7fa"/>
+                    <rect x="50" y="150" width="100" height="100" rx="10" fill="#003366"/>
+                    <text x="100" y="210" text-anchor="middle" fill="white" font-family="var(--header-font)" font-size="18">OLT</text>
+                    <text x="100" y="140" text-anchor="middle" class="infographic-text">
+                        <tspan class="lang-en">Provider Central Office</tspan>
+                        <tspan class="lang-ms hidden">Pejabat Pusat Pembekal</tspan>
+                    </text>
+                    <line x1="150" y1="200" x2="300" y2="200" class="infographic-line" stroke-dasharray="5,5"/>
+                    <text x="225" y="185" text-anchor="middle" font-family="var(--header-font)" font-size="12">
+                        <tspan class="lang-en">Single Fiber (Up to 20km)</tspan>
+                        <tspan class="lang-ms hidden">Satu Gentian (Sehingga 20km)</tspan>
+                    </text>
+                    <path d="M300 175 L350 150 L350 250 Z" class="infographic-highlight" />
+                    <text x="325" y="270" text-anchor="middle" class="infographic-text">
+                        <tspan class="lang-en">Passive Splitter</tspan>
+                        <tspan class="lang-ms hidden">Pemisah Pasif</tspan>
+                    </text>
+                    <path d="M350 200 C 400 200, 400 80, 450 80" class="infographic-line" fill="none"/>
+                    <path d="M350 200 C 400 200, 400 200, 450 200" class="infographic-line" fill="none"/>
+                    <path d="M350 200 C 400 200, 400 320, 450 320" class="infographic-line" fill="none"/>
+                    <rect x="450" y="150" width="150" height="100" rx="10" fill="#0055a4"/>
+                    <text x="525" y="205" text-anchor="middle" fill="white" font-family="var(--header-font)" font-size="16">
+                        <tspan class="lang-en">School (PoP)</tspan>
+                        <tspan class="lang-ms hidden">Sekolah (PoP)</tspan>
+                    </text>
+                    <text x="525" y="225" text-anchor="middle" fill="white" font-family="var(--header-font)" font-size="12">ONT/ONU Inside</text>
+                    <line x1="600" y1="200" x2="650" y2="100" class="infographic-line" stroke-dasharray="3,3"/>
+                    <line x1="600" y1="200" x2="650" y2="300" class="infographic-line" stroke-dasharray="3,3"/>
+                    <circle cx="675" cy="100" r="20" fill="#ffc400"/>
+                    <text x="735" y="105" text-anchor="middle" class="infographic-text">
+                        <tspan class="lang-en">Homes</tspan>
+                        <tspan class="lang-ms hidden">Rumah</tspan>
+                    </text>
+                    <circle cx="675" cy="300" r="20" fill="#ffc400"/>
+                    <text x="745" y="305" text-anchor="middle" class="infographic-text">
+                        <tspan class="lang-en">Community</tspan>
+                        <tspan class="lang-ms hidden">Komuniti</tspan>
+                    </text>
+                     <text x="525" y="140" text-anchor="middle" class="infographic-text" font-size="16">
+                        <tspan class="lang-en">Community Hub</tspan>
+                        <tspan class="lang-ms hidden">Hab Komuniti</tspan>
+                    </text>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Works Cited Section -->
+        <section id="works-cited">
+            <h2>
+                <span class="lang-en">Works Cited</span>
+                <span class="lang-ms hidden">Rujukan</span>
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th><span class="lang-en">Source</span><span class="lang-ms hidden">Sumber</span></th>
+                        <th><span class="lang-en">Link</span><span class="lang-ms hidden">Pautan</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- The script will populate this section -->
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <span class="lang-en">All Rights Reserved</span><span class="lang-ms hidden">Hak Cipta Terpelihara</span> Tc. Bakrizal Fahmi bin Abu Bakar.</p>
+    </footer>
+
+    <script>
+        // Mobile navigation logic
+        const mobileNavBtn = document.getElementById('mobile-nav-btn');
+        const navLinks = document.getElementById('nav-links');
+        mobileNavBtn.addEventListener('click', () => navLinks.classList.toggle('show'));
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 992) navLinks.classList.remove('show');
+            });
+        });
+
+        // Language switcher logic
+        const htmlEl = document.documentElement;
+        const enBtn = document.getElementById('lang-en-btn');
+        const msBtn = document.getElementById('lang-ms-btn');
+
+        function setLanguage(lang) {
+            htmlEl.setAttribute('lang', lang);
+
+            if (lang === 'en') {
+                enBtn.classList.add('active');
+                msBtn.classList.remove('active');
+            } else {
+                msBtn.classList.add('active');
+                enBtn.classList.remove('active');
+            }
+
+            document.querySelectorAll('.lang-en').forEach(el => {
+                if (lang === 'en') el.classList.remove('hidden');
+                else el.classList.add('hidden');
+            });
+            document.querySelectorAll('.lang-ms').forEach(el => {
+                if (lang === 'ms') el.classList.remove('hidden');
+                else el.classList.add('hidden');
+            });
+        }
+
+        enBtn.addEventListener('click', () => setLanguage('en'));
+        msBtn.addEventListener('click', () => setLanguage('ms'));
+
+        // --- UPDATED WORKS CITED LIST ---
+        const worksCited = [
+            { title: 'True ISP Education Project | TP-Link Malaysia', url: 'https://www.omadanetworks.com/my/business-networking/case-study/true-isp-education-project/' },
+            { title: 'Education - TM One', url: 'https://www.tmone.com.my/education/' },
+            { title: 'Lkan: 337 Sekolah Masih Guna Teknologi Broadband 4g - BERNAMA', url: 'https://www.bernama.com/bm/news.php?id=2314198' },
+            { title: 'Kerajaan sedia pakej internet berkelajuan tinggi untuk sekolah...', url: 'https://www.astroawani.com/berita-malaysia/kerajaan-sedia-pakej-internet-berkelajuan-tinggi-untuk-langganan-sekolah-kpm-mulai-1-julai-fahmi-471150' },
+            { title: 'MAXIS eKELAS | eKelas', url: 'https://www.ekelas.com.my/' },
+            { title: 'CelcomDigi Business | 5G and Digital Solutions', url: 'https://business.celcomdigi.com/' },
+            { title: 'What is GPON technology? - Hitron Americas', url: 'https://us.hitrontech.com/learn/what-is-gpon-technology/' },
+            { title: '(PDF) Education Policy: A Case Study of Digitizing Education in Malaysia', url: 'https://www.researchgate.net/publication/271604457_Education_Policy_A_Case_Study_of_Digitizing_Education_in_Malaysia' },
+            { title: 'Tangani jurang digital dan perluas capaian internet luar bandar - UTHM News', url: 'https://news.uthm.edu.my/ms/2025/04/tangani-jurang-digital-dan-perluas-capaian-internet-luar-bandar/' },
+            { title: 'Pakej internet berkelajuan tinggi untuk sekolah mulai 1 Julai - Malaysiakini', url: 'https://m.malaysiakini.com/news/705943' },
+            { title: 'GPON\'s Thoughts and Realities - Ponlan', url: 'https://ponlan.com/home/ponlans/technology/ponlan-realities/' },
+            { title: 'FWA vs Wired Internet: Uncovering the Best Choice - 5Gstore.com', url: 'https://5gstore.com/blog/2024/11/12/fwa-vs-wired-internet-comparison/' },
+            { title: 'TM ONE-USIM COLLABORATION TO ENHANCE UNIVERSITY\'S DIGITAL TRANSFORMATION', url: 'https://tm.com.my/news/tm-one-usim-collaboration-to-enhance-universitys-digital-transformation-and-improve-digital-learning-experiences' },
+            { title: 'Business Fibre Internet - Maxis Business', url: 'https://www.business.maxis.com.my/en/data-internet/fibre/' },
+            { title: 'CelcomDigi Metaversity™ set to bring metaverse, XR, and AI...', url: 'https://corporate.celcomdigi.com/news/celcomdigi-metaversity-set-to-bring-metaverse-xr-and-ai-learning-and-education-solutions-to-universities' },
+            { title: 'Dewan Rakyat: 4,324 sekolah luar bandar dilengkapi capaian internet -KPM', url: 'https://www.kosmo.com.my/2024/03/27/dewan-rakyat-4324-sekolah-luar-bandar-dilengkapi-capaian-internet-kpm/' },
+            { title: 'What Is GPON (Gigabit Passive Optical Network)? - VSOL', url: 'https://www.vsolcn.com/blog/what-is-gpon-gpon-networks.html' },
+            { title: 'Gigabit Passive Optical Networking (GPON) - Ohio School Design Manual', url: 'https://osdm.ofcc.ohio.gov/wps/portal/gov/osdm/current-osdm/chapter-7-sustainable-design/13-gigabit-passive-optical-networking-gpon' },
+            { title: 'How GPON Works - gpon.com', url: 'https://www.gpon.com/how-gpon-works' },
+            { title: '(PDF) Evaluation of a Web Based System (Let-Gen) for 1BestariNet ID Distribution', url: 'https://www.researchgate.net/publication/320414558_Evaluation_of_a_Web_Based_System_Let-Gen_for_1BestariNet_ID_Distribution_in_Malaysia' }
+        ];
+
+        const worksCitedTableBody = document.querySelector('#works-cited tbody');
+        worksCited.forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${item.title}</td>
+                <td>
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer">
+                        <span class="lang-en">Visit</span>
+                        <span class="lang-ms hidden">Lawati</span>
+                    </a>
+                </td>
+            `;
+            worksCitedTableBody.appendChild(row);
+        });
+
+        // Initial language setup
+        const initialLang = htmlEl.getAttribute('lang') || 'en';
+        setLanguage(initialLang);
+    </script>
+</body>
+</html>
