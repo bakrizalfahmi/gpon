@@ -274,6 +274,45 @@
             }
         }
         
+        @media (max-width: 768px) {
+            /* --- RESPONSIVE TABLE STYLES FOR MOBILE --- */
+            .responsive-table thead {
+                display: none; /* Hide table headers */
+            }
+
+            .responsive-table tr {
+                display: block;
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            }
+
+            .responsive-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                text-align: right;
+                border: none;
+                border-bottom: 1px solid #eee;
+                padding: 10px;
+            }
+
+            .responsive-table td:last-child {
+                border-bottom: none;
+            }
+
+            .responsive-table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                text-align: left;
+                margin-right: 15px;
+                color: var(--primary-color);
+                font-family: var(--header-font);
+            }
+            /* --- END OF RESPONSIVE TABLE STYLES --- */
+        }
+
         @media (max-width: 600px) {
             header h1 {
                 font-size: 1.8em;
@@ -602,7 +641,8 @@
                 <p>The relationship between GPON and 5G FWA should be viewed as complementary rather than purely competitive. GPON is the ideal technology for the primary, high-capacity backbone of a school's network. 5G FWA serves as a crucial strategic tool to ensure universal coverage, providing a high-quality solution for schools that are beyond the immediate reach of fiber and offering a valuable redundancy option for all.</p>
                 <h3>5.3 Table 5.1: Technology Comparison Matrix for School Environments</h3>
                 <p>To provide a clear overview for decision-makers, the following table summarizes the key attributes of each technology in the context of a Malaysian school environment.</p>
-                <table>
+                <!-- ADDED .responsive-table class -->
+                <table class="responsive-table">
                     <thead>
                         <tr>
                             <th><span class="lang-en">Feature</span><span class="lang-ms hidden">Ciri</span></th>
@@ -613,46 +653,46 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong><span class="lang-en">Max Download Speed</span><span class="lang-ms hidden">Kelajuan Muat Turun Maks</span></strong></td>
-                            <td><span class="lang-en">2.4 Gbps (Standard)</span><span class="lang-ms hidden">2.4 Gbps (Standard)</span></td>
-                            <td><span class="lang-en">5-120 Mbps</span><span class="lang-ms hidden">5-120 Mbps</span></td>
-                            <td><span class="lang-en">Up to 1 Gbps (highly variable)</span><span class="lang-ms hidden">Sehingga 1 Gbps (sangat berubah-ubah)</span></td>
+                            <td data-label="Feature"><strong><span class="lang-en">Max Download Speed</span><span class="lang-ms hidden">Kelajuan Muat Turun Maks</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">2.4 Gbps (Standard)</span><span class="lang-ms hidden">2.4 Gbps (Standard)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">5-120 Mbps</span><span class="lang-ms hidden">5-120 Mbps</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Up to 1 Gbps (highly variable)</span><span class="lang-ms hidden">Sehingga 1 Gbps (sangat berubah-ubah)</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Max Upload Speed</span><span class="lang-ms hidden">Kelajuan Muat Naik Maks</span></strong></td>
-                            <td><span class="lang-en">1.2 Gbps (Standard)</span><span class="lang-ms hidden">1.2 Gbps (Standard)</span></td>
-                            <td><span class="lang-en">1-20 Mbps (highly asymmetrical)</span><span class="lang-ms hidden">1-20 Mbps (sangat tidak simetri)</span></td>
-                            <td><span class="lang-en">Variable, typically lower than download</span><span class="lang-ms hidden">Berubah-ubah, biasanya lebih rendah daripada muat turun</span></td>
+                            <td data-label="Feature"><strong><span class="lang-en">Max Upload Speed</span><span class="lang-ms hidden">Kelajuan Muat Naik Maks</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">1.2 Gbps (Standard)</span><span class="lang-ms hidden">1.2 Gbps (Standard)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">1-20 Mbps (highly asymmetrical)</span><span class="lang-ms hidden">1-20 Mbps (sangat tidak simetri)</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Variable, typically lower than download</span><span class="lang-ms hidden">Berubah-ubah, biasanya lebih rendah daripada muat turun</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Latency</span><span class="lang-ms hidden">Kependaman</span></strong></td>
-                            <td><span class="lang-en">Very Low (1-5 ms)</span><span class="lang-ms hidden">Sangat Rendah (1-5 ms)</span></td>
-                            <td><span class="lang-en">Moderate to High</span><span class="lang-ms hidden">Sederhana hingga Tinggi</span></td>
-                            <td><span class="lang-en">Low to Moderate (can fluctuate)</span><span class="lang-ms hidden">Rendah hingga Sederhana (boleh berubah-ubah)</span></td>
+                            <td data-label="Feature"><strong><span class="lang-en">Latency</span><span class="lang-ms hidden">Kependaman</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">Very Low (1-5 ms)</span><span class="lang-ms hidden">Sangat Rendah (1-5 ms)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Moderate to High</span><span class="lang-ms hidden">Sederhana hingga Tinggi</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Low to Moderate (can fluctuate)</span><span class="lang-ms hidden">Rendah hingga Sederhana (boleh berubah-ubah)</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Reliability/Stability</span><span class="lang-ms hidden">Kebolehpercayaan/Kestabilan</span></strong></td>
-                            <td><span class="lang-en">Very High (immune to EMI)</span><span class="lang-ms hidden">Sangat Tinggi (kebal kepada EMI)</span></td>
-                            <td><span class="lang-en">Low to Moderate (affected by distance, copper quality)</span><span class="lang-ms hidden">Rendah hingga Sederhana (dipengaruhi jarak, kualiti tembaga)</span></td>
-                            <td><span class="lang-en">Moderate (affected by signal, congestion, weather)</span><span class="lang-ms hidden">Sederhana (dipengaruhi isyarat, kesesakan, cuaca)</span></td>
+                            <td data-label="Feature"><strong><span class="lang-en">Reliability/Stability</span><span class="lang-ms hidden">Kebolehpercayaan/Kestabilan</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">Very High (immune to EMI)</span><span class="lang-ms hidden">Sangat Tinggi (kebal kepada EMI)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Low to Moderate (affected by distance, copper quality)</span><span class="lang-ms hidden">Rendah hingga Sederhana (dipengaruhi jarak, kualiti tembaga)</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Moderate (affected by signal, congestion, weather)</span><span class="lang-ms hidden">Sederhana (dipengaruhi isyarat, kesesakan, cuaca)</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Scalability</span><span class="lang-ms hidden">Kebolehskalaan</span></strong></td>
-                            <td><span class="lang-en">Very High (upgradable to 10G, 50G+)</span><span class="lang-ms hidden">Sangat Tinggi (boleh naik taraf ke 10G, 50G+)</span></td>
-                            <td><span class="lang-en">Very Low (at physical limit of copper)</span><span class="lang-ms hidden">Sangat Rendah (pada had fizikal tembaga)</span></td>
-                            <td><span class="lang-en">Moderate (dependent on cell tower upgrades)</span><span class="lang-ms hidden">Sederhana (bergantung pada naik taraf menara sel)</span></td>
+                            <td data-label="Feature"><strong><span class="lang-en">Scalability</span><span class="lang-ms hidden">Kebolehskalaan</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">Very High (upgradable to 10G, 50G+)</span><span class="lang-ms hidden">Sangat Tinggi (boleh naik taraf ke 10G, 50G+)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Very Low (at physical limit of copper)</span><span class="lang-ms hidden">Sangat Rendah (pada had fizikal tembaga)</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Moderate (dependent on cell tower upgrades)</span><span class="lang-ms hidden">Sederhana (bergantung pada naik taraf menara sel)</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Typical Cost</span><span class="lang-ms hidden">Kos Biasa</span></strong></td>
-                            <td><span class="lang-en">High initial setup, lower long-term TCO</span><span class="lang-ms hidden">Pemasangan awal tinggi, TCO jangka panjang lebih rendah</span></td>
-                            <td><span class="lang-en">Low setup, higher maintenance</span><span class="lang-ms hidden">Pemasangan rendah, penyelenggaraan lebih tinggi</span></td>
-                            <td><span class="lang-en">Low setup, potentially higher data costs</span><span class="lang-ms hidden">Pemasangan rendah, kos data berpotensi lebih tinggi</span></td>
+                            <td data-label="Feature"><strong><span class="lang-en">Typical Cost</span><span class="lang-ms hidden">Kos Biasa</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">High initial setup, lower long-term TCO</span><span class="lang-ms hidden">Pemasangan awal tinggi, TCO jangka panjang lebih rendah</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Low setup, higher maintenance</span><span class="lang-ms hidden">Pemasangan rendah, penyelenggaraan lebih tinggi</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Low setup, potentially higher data costs</span><span class="lang-ms hidden">Pemasangan rendah, kos data berpotensi lebih tinggi</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Ideal Use Case for Malaysian Schools</span><span class="lang-ms hidden">Kes Penggunaan Ideal untuk Sekolah Malaysia</span></strong></td>
-                            <td><span class="lang-en">Primary Standard: Backbone for all urban, suburban, and most rural schools via PoP project.</span><span class="lang-ms hidden">Piawaian Utama: Tulang belakang untuk semua sekolah bandar, pinggir bandar, dan kebanyakan luar bandar melalui projek PoP.</span></td>
-                            <td><span class="lang-en">Legacy Fallback: Only for areas with no other option; to be phased out.</span><span class="lang-ms hidden">Sandaran Legasi: Hanya untuk kawasan tanpa pilihan lain; untuk dihentikan secara berperingkat.</span></td>
-                            <td><span class="lang-en">Strategic Gap-Filler: For very remote schools, interim connectivity, and as a backup link.</span><span class="lang-ms hidden">Pengisi Jurang Strategik: Untuk sekolah yang sangat terpencil, kesalinghubungan sementara, dan sebagai pautan sandaran.</span></td>
+                            <td data-label="Feature"><strong><span class="lang-en">Ideal Use Case for Malaysian Schools</span><span class="lang-ms hidden">Kes Penggunaan Ideal untuk Sekolah Malaysia</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">Primary Standard: Backbone for all urban, suburban, and most rural schools via PoP project.</span><span class="lang-ms hidden">Piawaian Utama: Tulang belakang untuk semua sekolah bandar, pinggir bandar, dan kebanyakan luar bandar melalui projek PoP.</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Legacy Fallback: Only for areas with no other option; to be phased out.</span><span class="lang-ms hidden">Sandaran Legasi: Hanya untuk kawasan tanpa pilihan lain; untuk dihentikan secara berperingkat.</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Strategic Gap-Filler: For very remote schools, interim connectivity, and as a backup link.</span><span class="lang-ms hidden">Pengisi Jurang Strategik: Untuk sekolah yang sangat terpencil, kesalinghubungan sementara, dan sebagai pautan sandaran.</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -684,7 +724,7 @@
                 <h3>5.3 Jadual 5.1: Matriks Perbandingan Teknologi untuk Persekitaran Sekolah</h3>
                 <p>Untuk memberikan gambaran keseluruhan yang jelas kepada pembuat keputusan, jadual berikut merumuskan atribut utama setiap teknologi dalam konteks persekitaran sekolah di Malaysia.</p>
                 <!-- Table is already bilingual -->
-                <table>
+                <table class="responsive-table">
                     <thead>
                         <tr>
                             <th><span class="lang-en">Feature</span><span class="lang-ms">Ciri</span></th>
@@ -695,46 +735,46 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong><span class="lang-en">Max Download Speed</span><span class="lang-ms">Kelajuan Muat Turun Maks</span></strong></td>
-                            <td><span class="lang-en">2.4 Gbps (Standard)</span><span class="lang-ms">2.4 Gbps (Standard)</span></td>
-                            <td><span class="lang-en">5-120 Mbps</span><span class="lang-ms">5-120 Mbps</span></td>
-                            <td><span class="lang-en">Up to 1 Gbps (highly variable)</span><span class="lang-ms">Sehingga 1 Gbps (sangat berubah-ubah)</span></td>
+                            <td data-label="Ciri"><strong><span class="lang-en">Max Download Speed</span><span class="lang-ms">Kelajuan Muat Turun Maks</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">2.4 Gbps (Standard)</span><span class="lang-ms">2.4 Gbps (Standard)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">5-120 Mbps</span><span class="lang-ms">5-120 Mbps</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Up to 1 Gbps (highly variable)</span><span class="lang-ms">Sehingga 1 Gbps (sangat berubah-ubah)</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Max Upload Speed</span><span class="lang-ms">Kelajuan Muat Naik Maks</span></strong></td>
-                            <td><span class="lang-en">1.2 Gbps (Standard)</span><span class="lang-ms">1.2 Gbps (Standard)</span></td>
-                            <td><span class="lang-en">1-20 Mbps (highly asymmetrical)</span><span class="lang-ms">1-20 Mbps (sangat tidak simetri)</span></td>
-                            <td><span class="lang-en">Variable, typically lower than download</span><span class="lang-ms">Berubah-ubah, biasanya lebih rendah daripada muat turun</span></td>
+                            <td data-label="Ciri"><strong><span class="lang-en">Max Upload Speed</span><span class="lang-ms">Kelajuan Muat Naik Maks</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">1.2 Gbps (Standard)</span><span class="lang-ms">1.2 Gbps (Standard)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">1-20 Mbps (highly asymmetrical)</span><span class="lang-ms">1-20 Mbps (sangat tidak simetri)</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Variable, typically lower than download</span><span class="lang-ms">Berubah-ubah, biasanya lebih rendah daripada muat turun</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Latency</span><span class="lang-ms">Kependaman</span></strong></td>
-                            <td><span class="lang-en">Very Low (1-5 ms)</span><span class="lang-ms">Sangat Rendah (1-5 ms)</span></td>
-                            <td><span class="lang-en">Moderate to High</span><span class="lang-ms">Sederhana hingga Tinggi</span></td>
-                            <td><span class="lang-en">Low to Moderate (can fluctuate)</span><span class="lang-ms">Rendah hingga Sederhana (boleh berubah-ubah)</span></td>
+                            <td data-label="Ciri"><strong><span class="lang-en">Latency</span><span class="lang-ms">Kependaman</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">Very Low (1-5 ms)</span><span class="lang-ms">Sangat Rendah (1-5 ms)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Moderate to High</span><span class="lang-ms">Sederhana hingga Tinggi</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Low to Moderate (can fluctuate)</span><span class="lang-ms">Rendah hingga Sederhana (boleh berubah-ubah)</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Reliability/Stability</span><span class="lang-ms">Kebolehpercayaan/Kestabilan</span></strong></td>
-                            <td><span class="lang-en">Very High (immune to EMI)</span><span class="lang-ms">Sangat Tinggi (kebal kepada EMI)</span></td>
-                            <td><span class="lang-en">Low to Moderate (affected by distance, copper quality)</span><span class="lang-ms">Rendah hingga Sederhana (dipengaruhi jarak, kualiti tembaga)</span></td>
-                            <td><span class="lang-en">Moderate (affected by signal, congestion, weather)</span><span class="lang-ms">Sederhana (dipengaruhi isyarat, kesesakan, cuaca)</span></td>
+                            <td data-label="Ciri"><strong><span class="lang-en">Reliability/Stability</span><span class="lang-ms">Kebolehpercayaan/Kestabilan</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">Very High (immune to EMI)</span><span class="lang-ms">Sangat Tinggi (kebal kepada EMI)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Low to Moderate (affected by distance, copper quality)</span><span class="lang-ms">Rendah hingga Sederhana (dipengaruhi jarak, kualiti tembaga)</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Moderate (affected by signal, congestion, weather)</span><span class="lang-ms">Sederhana (dipengaruhi isyarat, kesesakan, cuaca)</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Scalability</span><span class="lang-ms">Kebolehskalaan</span></strong></td>
-                            <td><span class="lang-en">Very High (upgradable to 10G, 50G+)</span><span class="lang-ms">Sangat Tinggi (boleh naik taraf ke 10G, 50G+)</span></td>
-                            <td><span class="lang-en">Very Low (at physical limit of copper)</span><span class="lang-ms">Sangat Rendah (pada had fizikal tembaga)</span></td>
-                            <td><span class="lang-en">Moderate (dependent on cell tower upgrades)</span><span class="lang-ms">Sederhana (bergantung pada naik taraf menara sel)</span></td>
+                            <td data-label="Ciri"><strong><span class="lang-en">Scalability</span><span class="lang-ms">Kebolehskalaan</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">Very High (upgradable to 10G, 50G+)</span><span class="lang-ms">Sangat Tinggi (boleh naik taraf ke 10G, 50G+)</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Very Low (at physical limit of copper)</span><span class="lang-ms">Sangat Rendah (pada had fizikal tembaga)</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Moderate (dependent on cell tower upgrades)</span><span class="lang-ms">Sederhana (bergantung pada naik taraf menara sel)</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Typical Cost</span><span class="lang-ms">Kos Biasa</span></strong></td>
-                            <td><span class="lang-en">High initial setup, lower long-term TCO</span><span class="lang-ms">Pemasangan awal tinggi, TCO jangka panjang lebih rendah</span></td>
-                            <td><span class="lang-en">Low setup, higher maintenance</span><span class="lang-ms">Pemasangan rendah, penyelenggaraan lebih tinggi</span></td>
-                            <td><span class="lang-en">Low setup, potentially higher data costs</span><span class="lang-ms">Pemasangan rendah, kos data berpotensi lebih tinggi</span></td>
+                            <td data-label="Ciri"><strong><span class="lang-en">Typical Cost</span><span class="lang-ms">Kos Biasa</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">High initial setup, lower long-term TCO</span><span class="lang-ms">Pemasangan awal tinggi, TCO jangka panjang lebih rendah</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Low setup, higher maintenance</span><span class="lang-ms">Pemasangan rendah, penyelenggaraan lebih tinggi</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Low setup, potentially higher data costs</span><span class="lang-ms">Pemasangan rendah, kos data berpotensi lebih tinggi</span></td>
                         </tr>
                         <tr>
-                            <td><strong><span class="lang-en">Ideal Use Case for Malaysian Schools</span><span class="lang-ms">Kes Penggunaan Ideal untuk Sekolah Malaysia</span></strong></td>
-                            <td><span class="lang-en">Primary Standard: Backbone for all urban, suburban, and most rural schools via PoP project.</span><span class="lang-ms">Piawaian Utama: Tulang belakang untuk semua sekolah bandar, pinggir bandar, dan kebanyakan luar bandar melalui projek PoP.</span></td>
-                            <td><span class="lang-en">Legacy Fallback: Only for areas with no other option; to be phased out.</span><span class="lang-ms">Sandaran Legasi: Hanya untuk kawasan tanpa pilihan lain; untuk dihentikan secara berperingkat.</span></td>
-                            <td><span class="lang-en">Strategic Gap-Filler: For very remote schools, interim connectivity, and as a backup link.</span><span class="lang-ms">Pengisi Jurang Strategik: Untuk sekolah yang sangat terpencil, kesalinghubungan sementara, dan sebagai pautan sandaran.</span></td>
+                            <td data-label="Ciri"><strong><span class="lang-en">Ideal Use Case for Malaysian Schools</span><span class="lang-ms">Kes Penggunaan Ideal untuk Sekolah Malaysia</span></strong></td>
+                            <td data-label="GPON"><span class="lang-en">Primary Standard: Backbone for all urban, suburban, and most rural schools via PoP project.</span><span class="lang-ms">Piawaian Utama: Tulang belakang untuk semua sekolah bandar, pinggir bandar, dan kebanyakan luar bandar melalui projek PoP.</span></td>
+                            <td data-label="ADSL/VDSL"><span class="lang-en">Legacy Fallback: Only for areas with no other option; to be phased out.</span><span class="lang-ms">Sandaran Legasi: Hanya untuk kawasan tanpa pilihan lain; untuk dihentikan secara berperingkat.</span></td>
+                            <td data-label="5G FWA"><span class="lang-en">Strategic Gap-Filler: For very remote schools, interim connectivity, and as a backup link.</span><span class="lang-ms">Pengisi Jurang Strategik: Untuk sekolah yang sangat terpencil, kesalinghubungan sementara, dan sebagai pautan sandaran.</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -777,7 +817,8 @@
                 </ul>
                 <h3>6.4 Table 6.1: Malaysian Telco Business Fibre Plan Summary</h3>
                 <p>The following table provides a comparative summary of the standard business fiber plans offered by the major providers, which serve as a baseline for evaluating the upcoming government package for schools.</p>
-                <table>
+                <!-- ADDED .responsive-table class -->
+                <table class="responsive-table">
                     <thead>
                         <tr>
                             <th>Provider</th>
@@ -788,76 +829,76 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>TM Unifi</td>
-                            <td>100Mbps / 50Mbps</td>
-                            <td>119</td>
-                            <td>Dynamic IP, WiFi 6 Router</td>
+                            <td data-label="Provider">TM Unifi</td>
+                            <td data-label="Plan Speed (DL/UL)">100Mbps / 50Mbps</td>
+                            <td data-label="Monthly Price (RM)">119</td>
+                            <td data-label="Key Features">Dynamic IP, WiFi 6 Router</td>
                         </tr>
                         <tr>
-                            <td>TM Unifi</td>
-                            <td>300Mbps / 50Mbps</td>
-                            <td>139</td>
-                            <td>Dynamic IP, WiFi 6 Router, Mesh WiFi</td>
+                            <td data-label="Provider">TM Unifi</td>
+                            <td data-label="Plan Speed (DL/UL)">300Mbps / 50Mbps</td>
+                            <td data-label="Monthly Price (RM)">139</td>
+                            <td data-label="Key Features">Dynamic IP, WiFi 6 Router, Mesh WiFi</td>
                         </tr>
                         <tr>
-                            <td>TM Unifi</td>
-                            <td>500Mbps / 100Mbps</td>
-                            <td>199</td>
-                            <td>Dynamic IP, WiFi 6 Router, Mesh WiFi</td>
+                            <td data-label="Provider">TM Unifi</td>
+                            <td data-label="Plan Speed (DL/UL)">500Mbps / 100Mbps</td>
+                            <td data-label="Monthly Price (RM)">199</td>
+                            <td data-label="Key Features">Dynamic IP, WiFi 6 Router, Mesh WiFi</td>
                         </tr>
                         <tr>
-                            <td>TM Unifi</td>
-                            <td>1Gbps / 500Mbps</td>
-                            <td>319</td>
-                            <td>Dynamic IP, WiFi 6 Router, Mesh WiFi, 12-hr Service Restoration</td>
+                            <td data-label="Provider">TM Unifi</td>
+                            <td data-label="Plan Speed (DL/UL)">1Gbps / 500Mbps</td>
+                            <td data-label="Monthly Price (RM)">319</td>
+                            <td data-label="Key Features">Dynamic IP, WiFi 6 Router, Mesh WiFi, 12-hr Service Restoration</td>
                         </tr>
                         <tr>
-                            <td>Maxis</td>
-                            <td>100Mbps / 50Mbps</td>
-                            <td>119</td>
-                            <td>Dynamic IP, 4G Wireless Backup, WiFi 6 Router</td>
+                            <td data-label="Provider">Maxis</td>
+                            <td data-label="Plan Speed (DL/UL)">100Mbps / 50Mbps</td>
+                            <td data-label="Monthly Price (RM)">119</td>
+                            <td data-label="Key Features">Dynamic IP, 4G Wireless Backup, WiFi 6 Router</td>
                         </tr>
                         <tr>
-                            <td>Maxis</td>
-                            <td>300Mbps / 100Mbps</td>
-                            <td>179</td>
-                            <td>Dynamic IP, 4G Wireless Backup, Free Mesh WiFi</td>
+                            <td data-label="Provider">Maxis</td>
+                            <td data-label="Plan Speed (DL/UL)">300Mbps / 100Mbps</td>
+                            <td data-label="Monthly Price (RM)">179</td>
+                            <td data-label="Key Features">Dynamic IP, 4G Wireless Backup, Free Mesh WiFi</td>
                         </tr>
                         <tr>
-                            <td>Maxis</td>
-                            <td>500Mbps / 100Mbps</td>
-                            <td>219</td>
-                            <td>Dynamic IP, 4G Wireless Backup, Free Mesh WiFi</td>
+                            <td data-label="Provider">Maxis</td>
+                            <td data-label="Plan Speed (DL/UL)">500Mbps / 100Mbps</td>
+                            <td data-label="Monthly Price (RM)">219</td>
+                            <td data-label="Key Features">Dynamic IP, 4G Wireless Backup, Free Mesh WiFi</td>
                         </tr>
                         <tr>
-                            <td>Maxis</td>
-                            <td>1Gbps / 500Mbps</td>
-                            <td>299</td>
-                            <td>Dynamic IP, 4G Wireless Backup, Free Mesh WiFi</td>
+                            <td data-label="Provider">Maxis</td>
+                            <td data-label="Plan Speed (DL/UL)">1Gbps / 500Mbps</td>
+                            <td data-label="Monthly Price (RM)">299</td>
+                            <td data-label="Key Features">Dynamic IP, 4G Wireless Backup, Free Mesh WiFi</td>
                         </tr>
                         <tr>
-                            <td>CelcomDigi</td>
-                            <td>100Mbps / 50Mbps</td>
-                            <td>119</td>
-                            <td>Dynamic IP, 4G Wireless Backup, WiFi 6 Router, Free Mesh WiFi</td>
+                            <td data-label="Provider">CelcomDigi</td>
+                            <td data-label="Plan Speed (DL/UL)">100Mbps / 50Mbps</td>
+                            <td data-label="Monthly Price (RM)">119</td>
+                            <td data-label="Key Features">Dynamic IP, 4G Wireless Backup, WiFi 6 Router, Free Mesh WiFi</td>
                         </tr>
                         <tr>
-                            <td>CelcomDigi</td>
-                            <td>300Mbps / 50Mbps</td>
-                            <td>139</td>
-                            <td>Dynamic IP, 4G Wireless Backup, WiFi 6 Router, Free Mesh WiFi</td>
+                            <td data-label="Provider">CelcomDigi</td>
+                            <td data-label="Plan Speed (DL/UL)">300Mbps / 50Mbps</td>
+                            <td data-label="Monthly Price (RM)">139</td>
+                            <td data-label="Key Features">Dynamic IP, 4G Wireless Backup, WiFi 6 Router, Free Mesh WiFi</td>
                         </tr>
                         <tr>
-                            <td>CelcomDigi</td>
-                            <td>500Mbps / 100Mbps</td>
-                            <td>199</td>
-                            <td>Dynamic IP, 4G Wireless Backup, WiFi 6 Router, Free Mesh WiFi</td>
+                            <td data-label="Provider">CelcomDigi</td>
+                            <td data-label="Plan Speed (DL/UL)">500Mbps / 100Mbps</td>
+                            <td data-label="Monthly Price (RM)">199</td>
+                            <td data-label="Key Features">Dynamic IP, 4G Wireless Backup, WiFi 6 Router, Free Mesh WiFi</td>
                         </tr>
                         <tr>
-                            <td>CelcomDigi</td>
-                            <td>1Gbps / 500Mbps</td>
-                            <td>299</td>
-                            <td>Dynamic IP, 4G Wireless Backup, WiFi 6 Router, Free Mesh WiFi</td>
+                            <td data-label="Provider">CelcomDigi</td>
+                            <td data-label="Plan Speed (DL/UL)">1Gbps / 500Mbps</td>
+                            <td data-label="Monthly Price (RM)">299</td>
+                            <td data-label="Key Features">Dynamic IP, 4G Wireless Backup, WiFi 6 Router, Free Mesh WiFi</td>
                         </tr>
                     </tbody>
                 </table>
@@ -894,7 +935,7 @@
                 <h3>6.4 Jadual 6.1: Ringkasan Pelan Gentian Perniagaan Telco Malaysia</h3>
                 <p>Jadual berikut menyediakan ringkasan perbandingan pelan gentian perniagaan standard yang ditawarkan oleh penyedia utama, yang berfungsi sebagai garis dasar untuk menilai pakej kerajaan yang akan datang untuk sekolah.</p>
                 <!-- Table is already bilingual -->
-                <table>
+                <table class="responsive-table">
                     <thead>
                         <tr>
                             <th>Penyedia</th>
@@ -905,76 +946,76 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>TM Unifi</td>
-                            <td>100Mbps / 50Mbps</td>
-                            <td>119</td>
-                            <td>IP Dinamik, Penghala WiFi 6</td>
+                            <td data-label="Penyedia">TM Unifi</td>
+                            <td data-label="Kelajuan Pelan">100Mbps / 50Mbps</td>
+                            <td data-label="Harga (RM)">119</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Penghala WiFi 6</td>
                         </tr>
                         <tr>
-                            <td>TM Unifi</td>
-                            <td>300Mbps / 50Mbps</td>
-                            <td>139</td>
-                            <td>IP Dinamik, Penghala WiFi 6, WiFi Mesh</td>
+                            <td data-label="Penyedia">TM Unifi</td>
+                            <td data-label="Kelajuan Pelan">300Mbps / 50Mbps</td>
+                            <td data-label="Harga (RM)">139</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Penghala WiFi 6, WiFi Mesh</td>
                         </tr>
                         <tr>
-                            <td>TM Unifi</td>
-                            <td>500Mbps / 100Mbps</td>
-                            <td>199</td>
-                            <td>IP Dinamik, Penghala WiFi 6, WiFi Mesh</td>
+                            <td data-label="Penyedia">TM Unifi</td>
+                            <td data-label="Kelajuan Pelan">500Mbps / 100Mbps</td>
+                            <td data-label="Harga (RM)">199</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Penghala WiFi 6, WiFi Mesh</td>
                         </tr>
                         <tr>
-                            <td>TM Unifi</td>
-                            <td>1Gbps / 500Mbps</td>
-                            <td>319</td>
-                            <td>IP Dinamik, Penghala WiFi 6, WiFi Mesh, Pemulihan Perkhidmatan 12 jam</td>
+                            <td data-label="Penyedia">TM Unifi</td>
+                            <td data-label="Kelajuan Pelan">1Gbps / 500Mbps</td>
+                            <td data-label="Harga (RM)">319</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Penghala WiFi 6, WiFi Mesh, Pemulihan Perkhidmatan 12 jam</td>
                         </tr>
                         <tr>
-                            <td>Maxis</td>
-                            <td>100Mbps / 50Mbps</td>
-                            <td>119</td>
-                            <td>IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6</td>
+                            <td data-label="Penyedia">Maxis</td>
+                            <td data-label="Kelajuan Pelan">100Mbps / 50Mbps</td>
+                            <td data-label="Harga (RM)">119</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6</td>
                         </tr>
                         <tr>
-                            <td>Maxis</td>
-                            <td>300Mbps / 100Mbps</td>
-                            <td>179</td>
-                            <td>IP Dinamik, Sandaran Wayarles 4G, WiFi Mesh Percuma</td>
+                            <td data-label="Penyedia">Maxis</td>
+                            <td data-label="Kelajuan Pelan">300Mbps / 100Mbps</td>
+                            <td data-label="Harga (RM)">179</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Sandaran Wayarles 4G, WiFi Mesh Percuma</td>
                         </tr>
                         <tr>
-                            <td>Maxis</td>
-                            <td>500Mbps / 100Mbps</td>
-                            <td>219</td>
-                            <td>IP Dinamik, Sandaran Wayarles 4G, WiFi Mesh Percuma</td>
+                            <td data-label="Penyedia">Maxis</td>
+                            <td data-label="Kelajuan Pelan">500Mbps / 100Mbps</td>
+                            <td data-label="Harga (RM)">219</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Sandaran Wayarles 4G, WiFi Mesh Percuma</td>
                         </tr>
                         <tr>
-                            <td>Maxis</td>
-                            <td>1Gbps / 500Mbps</td>
-                            <td>299</td>
-                            <td>IP Dinamik, Sandaran Wayarles 4G, WiFi Mesh Percuma</td>
+                            <td data-label="Penyedia">Maxis</td>
+                            <td data-label="Kelajuan Pelan">1Gbps / 500Mbps</td>
+                            <td data-label="Harga (RM)">299</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Sandaran Wayarles 4G, WiFi Mesh Percuma</td>
                         </tr>
                         <tr>
-                            <td>CelcomDigi</td>
-                            <td>100Mbps / 50Mbps</td>
-                            <td>119</td>
-                            <td>IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6, WiFi Mesh Percuma</td>
+                            <td data-label="Penyedia">CelcomDigi</td>
+                            <td data-label="Kelajuan Pelan">100Mbps / 50Mbps</td>
+                            <td data-label="Harga (RM)">119</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6, WiFi Mesh Percuma</td>
                         </tr>
                         <tr>
-                            <td>CelcomDigi</td>
-                            <td>300Mbps / 50Mbps</td>
-                            <td>139</td>
-                            <td>IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6, WiFi Mesh Percuma</td>
+                            <td data-label="Penyedia">CelcomDigi</td>
+                            <td data-label="Kelajuan Pelan">300Mbps / 50Mbps</td>
+                            <td data-label="Harga (RM)">139</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6, WiFi Mesh Percuma</td>
                         </tr>
                         <tr>
-                            <td>CelcomDigi</td>
-                            <td>500Mbps / 100Mbps</td>
-                            <td>199</td>
-                            <td>IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6, WiFi Mesh Percuma</td>
+                            <td data-label="Penyedia">CelcomDigi</td>
+                            <td data-label="Kelajuan Pelan">500Mbps / 100Mbps</td>
+                            <td data-label="Harga (RM)">199</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6, WiFi Mesh Percuma</td>
                         </tr>
                         <tr>
-                            <td>CelcomDigi</td>
-                            <td>1Gbps / 500Mbps</td>
-                            <td>299</td>
-                            <td>IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6, WiFi Mesh Percuma</td>
+                            <td data-label="Penyedia">CelcomDigi</td>
+                            <td data-label="Kelajuan Pelan">1Gbps / 500Mbps</td>
+                            <td data-label="Harga (RM)">299</td>
+                            <td data-label="Ciri Utama">IP Dinamik, Sandaran Wayarles 4G, Penghala WiFi 6, WiFi Mesh Percuma</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1012,7 +1053,8 @@
                 </ul>
                 <h3>7.4 Table 7.1: Summary of LKAN Findings on PoP Project (Siri 2 2024)</h3>
                 <p>The following table crystallizes the key findings from the National Audit Report, providing clear evidence of the implementation gap.</p>
-                <table>
+                <!-- ADDED .responsive-table class -->
+                <table class="responsive-table">
                     <thead>
                         <tr>
                             <th>Audit Finding</th>
@@ -1023,28 +1065,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>PoP Phase 1 Completion</td>
-                            <td>599 out of 630 sites (95%) completed as of Dec 2023.</td>
-                            <td>The physical fiber infrastructure is largely in place.</td>
-                            <td>Proceed with Phase 2 implementation.</td>
+                            <td data-label="Audit Finding">PoP Phase 1 Completion</td>
+                            <td data-label="Key Statistic">599 out of 630 sites (95%) completed as of Dec 2023.</td>
+                            <td data-label="Implication">The physical fiber infrastructure is largely in place.</td>
+                            <td data-label="LKAN Recommendation">Proceed with Phase 2 implementation.</td>
                         </tr>
                         <tr>
-                            <td>PoP Service Subscription Rate</td>
-                            <td>Only 2 out of 599 schools (0.33%) subscribed to PoP internet.</td>
-                            <td>Expensive, superior infrastructure is lying dormant and unutilized.</td>
-                            <td>-</td>
+                            <td data-label="Audit Finding">PoP Service Subscription Rate</td>
+                            <td data-label="Key Statistic">Only 2 out of 599 schools (0.33%) subscribed to PoP internet.</td>
+                            <td data-label="Implication">Expensive, superior infrastructure is lying dormant and unutilized.</td>
+                            <td data-label="LKAN Recommendation">-</td>
                         </tr>
                         <tr>
-                            <td>Reason for Low Subscription</td>
-                            <td>KPM was bound by an interim internet contract (Jul 2022 - Jun 2024) preventing new subscriptions.</td>
-                            <td>A critical failure of inter-agency coordination and planning.</td>
-                            <td>Ministry of Communications must coordinate with KPM for Phase 2.</td>
+                            <td data-label="Audit Finding">Reason for Low Subscription</td>
+                            <td data-label="Key Statistic">KPM was bound by an interim internet contract (Jul 2022 - Jun 2024) preventing new subscriptions.</td>
+                            <td data-label="Implication">A critical failure of inter-agency coordination and planning.</td>
+                            <td data-label="LKAN Recommendation">Ministry of Communications must coordinate with KPM for Phase 2.</td>
                         </tr>
                         <tr>
-                            <td>BBGP Alignment Status</td>
-                            <td>27 out of 28 older broadband alignments have been unutilized for 6-10 years.</td>
-                            <td>A long-standing pattern of infrastructure deployment without utilization.</td>
-                            <td>Provide a comprehensive plan for utilizing dormant alignments.</td>
+                            <td data-label="Audit Finding">BBGP Alignment Status</td>
+                            <td data-label="Key Statistic">27 out of 28 older broadband alignments have been unutilized for 6-10 years.</td>
+                            <td data-label="Implication">A long-standing pattern of infrastructure deployment without utilization.</td>
+                            <td data-label="LKAN Recommendation">Provide a comprehensive plan for utilizing dormant alignments.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1074,7 +1116,7 @@
                 <h3>7.4 Jadual 7.1: Ringkasan Penemuan LKAN mengenai Projek PoP (Siri 2 2024)</h3>
                 <p>Jadual berikut menghablurkan penemuan utama daripada Laporan Audit Negara, memberikan bukti jelas tentang jurang pelaksanaan.</p>
                 <!-- Table is already bilingual -->
-                <table>
+                <table class="responsive-table">
                     <thead>
                         <tr>
                             <th>Penemuan Audit</th>
@@ -1085,28 +1127,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Penyiapan PoP Fasa 1</td>
-                            <td>599 daripada 630 tapak (95%) siap sehingga Dis 2023.</td>
-                            <td>Infrastruktur gentian fizikal sebahagian besarnya telah siap.</td>
-                            <td>Teruskan dengan pelaksanaan Fasa 2.</td>
+                            <td data-label="Penemuan Audit">Penyiapan PoP Fasa 1</td>
+                            <td data-label="Statistik Utama">599 daripada 630 tapak (95%) siap sehingga Dis 2023.</td>
+                            <td data-label="Implikasi">Infrastruktur gentian fizikal sebahagian besarnya telah siap.</td>
+                            <td data-label="Syor LKAN">Teruskan dengan pelaksanaan Fasa 2.</td>
                         </tr>
                         <tr>
-                            <td>Kadar Langganan Perkhidmatan PoP</td>
-                            <td>Hanya 2 daripada 599 sekolah (0.33%) melanggan internet PoP.</td>
-                            <td>Infrastruktur yang mahal dan unggul terbiar dan tidak digunakan.</td>
-                            <td>-</td>
+                            <td data-label="Penemuan Audit">Kadar Langganan Perkhidmatan PoP</td>
+                            <td data-label="Statistik Utama">Hanya 2 daripada 599 sekolah (0.33%) melanggan internet PoP.</td>
+                            <td data-label="Implikasi">Infrastruktur yang mahal dan unggul terbiar dan tidak digunakan.</td>
+                            <td data-label="Syor LKAN">-</td>
                         </tr>
                         <tr>
-                            <td>Sebab Langganan Rendah</td>
-                            <td>KPM terikat dengan kontrak internet interim (Jul 2022 - Jun 2024) yang menghalang langganan baharu.</td>
-                            <td>Kegagalan kritikal dalam penyelarasan dan perancangan antara agensi.</td>
-                            <td>Kementerian Komunikasi mesti menyelaras dengan KPM untuk Fasa 2.</td>
+                            <td data-label="Penemuan Audit">Sebab Langganan Rendah</td>
+                            <td data-label="Statistik Utama">KPM terikat dengan kontrak internet interim (Jul 2022 - Jun 2024) yang menghalang langganan baharu.</td>
+                            <td data-label="Implikasi">Kegagalan kritikal dalam penyelarasan dan perancangan antara agensi.</td>
+                            <td data-label="Syor LKAN">Kementerian Komunikasi mesti menyelaras dengan KPM untuk Fasa 2.</td>
                         </tr>
                         <tr>
-                            <td>Status Penjajaran BBGP</td>
-                            <td>27 daripada 28 penjajaran jalur lebar lama tidak digunakan selama 6-10 tahun.</td>
-                            <td>Corak pelaksanaan infrastruktur tanpa penggunaan yang telah lama wujud.</td>
-                            <td>Sediakan pelan komprehensif untuk menggunakan penjajaran yang tidak aktif.</td>
+                            <td data-label="Penemuan Audit">Status Penjajaran BBGP</td>
+                            <td data-label="Statistik Utama">27 daripada 28 penjajaran jalur lebar lama tidak digunakan selama 6-10 tahun.</td>
+                            <td data-label="Implikasi">Corak pelaksanaan infrastruktur tanpa penggunaan yang telah lama wujud.</td>
+                            <td data-label="Syor LKAN">Sediakan pelan komprehensif untuk menggunakan penjajaran yang tidak aktif.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1232,7 +1274,8 @@
                 <span class="lang-en">Works Cited</span>
                 <span class="lang-ms hidden">Rujukan</span>
             </h2>
-            <table>
+            <!-- ADDED .responsive-table class -->
+            <table class="responsive-table">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -1318,10 +1361,11 @@
         const worksCitedTableBody = document.querySelector('#works-cited tbody');
         worksCited.forEach((item, index) => {
             const row = document.createElement('tr');
+            // ADDED data-label attributes for responsive view
             row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${item.title}</td>
-                <td class="works-cited-link-cell">
+                <td data-label="No.">${index + 1}</td>
+                <td data-label="Source">${item.title}</td>
+                <td class="works-cited-link-cell" data-label="Link">
                     <a href="${item.url}" target="_blank" rel="noopener noreferrer" title="Lawati Pautan">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
